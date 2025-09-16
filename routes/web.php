@@ -9,5 +9,6 @@ Route::get('/', function () {
 
 // Kategori route
 Route::get('kategori', [KategoriController::class, 'index'])->name('kategori-index');
+Route::post('kategori/post', [KategoriController::class, 'store'])->name('kategori-post');
 
 
