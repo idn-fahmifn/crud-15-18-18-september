@@ -55,8 +55,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="#" method="post">
+                <form action="{{route('kategori-update', $data->id)}}" method="post">
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="form-group mt-2">
                             <label for="" class="form-label">Nama Kategori</label>

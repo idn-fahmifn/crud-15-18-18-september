@@ -36,4 +36,19 @@ class KategoriController extends Controller
         return view('kategori.detail', 
         compact('data'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $data = Kategori::findOrFail($id);
+        $request->validate([
+            'nama_kategori' => ['required', 'string', 'min:3', 'max:20'],
+            'deskripsi' => ['required']
+        ]); 
+        $data->update([
+            'nama_kategori' => $request->nama_kategori,
+            'deskripsi' => $request->deskripsi,
+        ]); 
+
+        return back()->with('success', 'Data berhasil diupdate');
+    }
 }
