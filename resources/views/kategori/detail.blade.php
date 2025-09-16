@@ -1,11 +1,11 @@
 @extends('template.app')
 
 @section('title')
-    Halaman Kategori Barang
+    {{$data->nama_kategori}}
 @endsection
 
 @section('sub-title')
-    Data Kategori Barang yang ada pada database kategori
+    {{$data->deskripsi}}
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
                 </div>
                 <div class="">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Tambah
+                        Edit Kategori
                     </button>
                 </div>
             </div>
@@ -38,16 +38,7 @@
                         <th>Pilihan</th>
                     </thead>
                     <tbody>
-                        @forelse ($data as $item)
-                            <tr>
-                                <td>{{ $item->nama_kategori }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td>
-                                    <a href="#" class="btn text-info">Detail</a>
-                                </td>
-                            </tr>
-                        @empty
-                        @endforelse
+                        
                     </tbody>
                 </table>
             </div>
@@ -64,16 +55,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('kategori-post') }}" method="post">
+                <form action="#" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mt-2">
                             <label for="" class="form-label">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" class="form-control">
+                            <input type="text" name="nama_kategori" value="{{$data->nama_kategori}}" class="form-control">
                         </div>
                         <div class="form-group mt-2">
                             <label for="" class="form-label">Deskripsi Kategori</label>
-                            <textarea name="deskripsi" class="form-control"></textarea>
+                            <textarea name="deskripsi" class="form-control">{{$data->deskripsi}}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

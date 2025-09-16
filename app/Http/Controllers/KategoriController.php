@@ -30,4 +30,10 @@ class KategoriController extends Controller
         ->with('success', 'Kategori berhasil ditambahkan');
 
     }
+    public function detail($id)
+    {
+        $data = Kategori::findOrFail($id);
+        return view('kategori.detail', 
+        compact('data'));
+    }
 }
