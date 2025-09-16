@@ -42,6 +42,8 @@
                 <span class="text-muted">@yield('sub-title')</span>
             </div>
         </div>
+
+        @yield('content')
         
     </div>
 
