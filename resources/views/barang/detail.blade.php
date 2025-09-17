@@ -1,11 +1,11 @@
 @extends('template.app')
 
 @section('title')
-    Halaman Kategori Barang
+    {{$data->nama_barang}}
 @endsection
 
 @section('sub-title')
-    Data Kategori Barang yang ada pada database kategori
+    {{$data->kategori->nama_kategori}}
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <div class="card-title">
-                    <h5>Data Kategori</h5>
-                    <span class="text-muted">Berikut adalah tabel kategori produk</span>
+                    <h5>Detail barang</h5>
+                    <span class="text-muted">{{$data->nama_barang}}</span>
                 </div>
                 <div class="">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Tambah
+                        Edit Kategori
                     </button>
                 </div>
             </div>
@@ -31,31 +31,23 @@
             @endif
 
             <div class="table-responsive my-3">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <th>Nama Kategori</th>
-                        <th>Deskripsi</th>
-                        <th>Pilihan</th>
-                    </thead>
+                <table class="table table-bordered table-striped">
                     <tbody>
-                        @forelse ($data as $item)
-                            <tr>
-                                <td>{{ $item->nama_kategori }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td>
-                                    <form action="{{ route('kategori-delete', $item->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <a href="{{ route('kategori-detail', $item->id) }}" class="btn text-info">Detail</a>
-                                        <button type="submit" class="btn text-danger" onclick="confirm('Yakin mau dihapus?')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
                         <tr>
-                            <td colspan="3" class="text-center">Tidak ditemukan data!</td>
+                            <td>Nama Barang  </td>
+                            <td>{{$data->nama_barang}}</td>
+                            <td rowspan="3">
+                                <img src="{{asset('storage/gambar/barang/'.$data->gambar_product)}}" width="100" alt="gambar barang">
+                            </td>
                         </tr>
-                        @endforelse
+                        <tr>
+                            <td>Harga  </td>
+                            <td>IDR. {{number_format($data->harga)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Stok</td>
+                            <td>{{$data->stok}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -72,16 +64,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{ route('kategori-post') }}" method="post">
+                <form action="{{route('kategori-update', $data->id)}}" method="post">
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="form-group mt-2">
                             <label for="" class="form-label">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" class="form-control">
+                            <input type="text" name="nama_kategori" value="{{$data->nama_kategori}}" class="form-control">
                         </div>
                         <div class="form-group mt-2">
                             <label for="" class="form-label">Deskripsi Kategori</label>
-                            <textarea name="deskripsi" class="form-control"></textarea>
+                            <textarea name="deskripsi" class="form-control">{{$data->deskripsi}}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
