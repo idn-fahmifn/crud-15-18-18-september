@@ -30,6 +30,17 @@
                 </div>
             @endif
 
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="table-responsive my-3">
                 <table class="table table-hover table-striped">
                     <thead>
@@ -47,14 +58,15 @@
                                         @csrf
                                         @method('delete')
                                         <a href="{{ route('kategori-detail', $item->id) }}" class="btn text-info">Detail</a>
-                                        <button type="submit" class="btn text-danger" onclick="confirm('Yakin mau dihapus?')">Hapus</button>
+                                        <button type="submit" class="btn text-danger"
+                                            onclick="confirm('Yakin mau dihapus?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
-                        <tr>
-                            <td colspan="3" class="text-center">Tidak ditemukan data!</td>
-                        </tr>
+                            <tr>
+                                <td colspan="3" class="text-center">Tidak ditemukan data!</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>

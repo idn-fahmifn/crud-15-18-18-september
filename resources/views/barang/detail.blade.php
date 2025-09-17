@@ -37,7 +37,7 @@
                             <td>Nama Barang  </td>
                             <td>{{$data->nama_barang}}</td>
                             <td rowspan="3">
-                                <img src="{{asset('storage/gambar/barang/'.$data->gambar_product)}}" width="100" alt="gambar barang">
+                                <img src="{{asset('storage/gambar/barang/'.$data->gambar_product)}}" width="300" alt="gambar barang">
                             </td>
                         </tr>
                         <tr>

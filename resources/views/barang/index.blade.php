@@ -30,11 +30,16 @@
                 </div>
             @endif
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $item)
-                    <p>{{$item}}</p>
-                @endforeach
-            @endif
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $item)
+                    <li>{{$item}}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
             <div class="table-responsive my-3">
                 <table class="table table-hover table-striped">
@@ -49,10 +54,10 @@
                                 <td>{{ $item->nama_barang }}</td>
                                 <td>{{ $item->kategori->nama_kategori }}</td>
                                 <td>
-                                    <form action="{{ route('kategori-delete', $item->id) }}" method="post">
+                                    <form action="{{ route('barang-delete', $item->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('kategori-detail', $item->id) }}" class="btn text-info">Detail</a>
+                                        <a href="{{ route('barang-detail', $item->id) }}" class="btn text-info">Detail</a>
                                         <button type="submit" class="btn text-danger"
                                             onclick="confirm('Yakin mau dihapus?')">Hapus</button>
                                     </form>
@@ -79,7 +84,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{route('barang-post')}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('barang-post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mt-2">
@@ -91,7 +96,7 @@
                             <select name="id_kategori" required class="form-control">
                                 <option value="">Pilih Kategori Barang</option>
                                 @foreach ($kategori as $item)
-                                    <option value="{{$item->id}}">{{$item->nama_kategori}}</option>
+                                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -107,7 +112,7 @@
                             <label for="" class="form-label">Gambar Barang</label>
                             <input type="file" name="gambar_product" accept="image/*" required class="form-control">
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
