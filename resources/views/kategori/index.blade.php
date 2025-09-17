@@ -43,7 +43,12 @@
                                 <td>{{ $item->nama_kategori }}</td>
                                 <td>{{ $item->deskripsi }}</td>
                                 <td>
-                                    <a href="#" class="btn text-info">Detail</a>
+                                    <form action="{{ route('kategori-delete', $item->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <a href="{{ route('kategori-detail', $item->id) }}" class="btn text-info">Detail</a>
+                                        <button type="submit" class="btn text-danger" onclick="confirm('Yakin mau dihapus?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty

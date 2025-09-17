@@ -12,6 +12,7 @@ Route::get('kategori', [KategoriController::class, 'index'])->name('kategori-ind
 Route::post('kategori/post', [KategoriController::class, 'store'])->name('kategori-post');
 Route::get('kategori/{param}', [KategoriController::class, 'detail'])->name('kategori-detail');
 Route::put('kategori/{param}', [KategoriController::class, 'update'])->name('kategori-update');
+Route::delete('kategori/{param}', [KategoriController::class, 'destroy'])->name('kategori-delete');
 
 
 
