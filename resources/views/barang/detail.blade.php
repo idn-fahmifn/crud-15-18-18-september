@@ -64,18 +64,36 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="{{route('kategori-update', $data->id)}}" method="post">
+                <form action="{{route('barang-update', $data->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="modal-body">
                         <div class="form-group mt-2">
-                            <label for="" class="form-label">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" value="{{$data->nama_kategori}}" class="form-control">
+                            <label for="" class="form-label">Nama barang</label>
+                            <input type="text" name="nama_barang" value="{{$data->nama_barang}}" required class="form-control">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="" class="form-label">Deskripsi Kategori</label>
-                            <textarea name="deskripsi" class="form-control">{{$data->deskripsi}}</textarea>
+                            <label for="" class="form-label">Kategori Barang</label>
+                            <select name="id_kategori" required class="form-control">
+                                <option value="{{$data->id_kategori}}">{{$data->kategori->nama_kategori}}</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{$item->id}}">{{$item->nama_kategori}}</option>
+                                @endforeach
+                            </select>
                         </div>
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Stok</label>
+                            <input type="number" name="stok" value="{{$data->stok}}" required class="form-control">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Harga</label>
+                            <input type="number" name="harga" value="{{$data->harga}}" required class="form-control">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="" class="form-label">Gambar Barang</label>
+                            <input type="file" name="gambar_product" accept="image/*" class="form-control">
+                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>

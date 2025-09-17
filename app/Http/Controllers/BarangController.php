@@ -48,7 +48,8 @@ class BarangController extends Controller
     public function detail($id)
     {
         $data = Barang::findOrFail($id);
+        $kategori = Kategori::all();
         return view('barang.detail', 
-        compact('data'));
+        compact('data','kategori'));
     }
 }
